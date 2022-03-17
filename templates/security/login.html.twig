@@ -16,9 +16,9 @@
 
     <h1 class="h3 mb-3 font-weight-normal">Merci de vous connecter</h1>
     <label for="inputEmail">Votre email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" placeholder="Votre email" required autofocus>
     <label for="inputPassword">Votre mot de passe</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" placeholder="Votre mot de passe" required>
 
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
@@ -35,7 +35,7 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary mt-5" type="submit">
+    <button class="btn btn-lg btn-primary mt-3" type="submit">
         Se connecter
     </button>
 </form>
