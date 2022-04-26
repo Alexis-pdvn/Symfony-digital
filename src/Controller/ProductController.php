@@ -57,6 +57,8 @@ class ProductController extends AbstractController
             return $this->redirectToRoute('products');
         }
 
+        dd($product);
+
         return $this->render('product/show.html.twig', [
             'product' => $product,
             'products' => $products

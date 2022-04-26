@@ -5,9 +5,28 @@
 
 <h1>Inscription</h1>
 
+
+	<div class="block_register">
     {% if notification %}
         <div class="alert alert-info">{{ notification }}</div>
     {% endif %}
-{{ form(form) }}
+
+    {{ form_start(form) }}
+    <div class="form" >
+  <div class="form_grid">
+        <div class="">{{ form_row(form.firstname) }}</div>
+        <div class="">{{ form_row(form.lastname) }}</div>
+   </div>
+        <div class="">{{ form_row(form.email) }}</div>
+        <div class="form_grid">{{ form_row(form.password) }}</div>
+    </div>
+    {{ form_end(form) }}
+
+			<hr>
+			<p>Déja inscrit ?<a href="{{ path('app_login') }}">
+					Connectez-vous</a>
+			</p>
+</div>
+
 
 {% endblock %}

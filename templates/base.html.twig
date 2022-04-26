@@ -7,6 +7,8 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.1.1"><title>{% block title %}My Digital Project{% endblock %}</title>
 
+    <link href="{{ asset('assets/sass/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/sass/style.css.map') }}" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/frenchbox.css') }}" rel="stylesheet">
@@ -35,8 +37,38 @@
     <link href="{{ asset('assets/css/carousel.css') }}" rel="stylesheet">
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<header class="fixed-top">
+    <div class="top-header">
+            <span> 
+        <a href="#">Contactez-nous</a>
+            </span>
+        <div class="navbar-item-custom">
+        
+            <span> 
+                {% if app.user %}
+            <div class="account_menu_hover">
+                    <a href="{{ path('account') }}"><i class="fa-solid fa-user"></i> Mon compte <small>({{ app.user.firstname }})</small></a>
+                        <div class="hover-user">
+                            <a href="{{ path('account_address') }}">Gérer mes adresses</a>
+                            <a href="{{ path('account_password') }}">Modifier mot de passe</a>
+                            <a href="{{ path('account_order') }}">Mes commandes</a>
+                            <a href="{{ path('app_logout') }}">Déconnexion</a>
+                        </div>
+            </div>
+                {% else %}
+                    <a href="{{ path('app_login') }}">Connexion</a> | <a href="{{ path('register') }}">Inscription</a>
+                {% endif %}
+            </span>
+            <span class="nav_cart">     
+            <a href="{{ path('cart') }}" >
+                <i class="fa-solid fa-cart-shopping"></i> Panier
+            </a>
+            </span>
+
+            
+        </div>
+    </div>
+    <nav class="navbar navbar-expand">
         <a class="navbar-brand" href="{{ path('home') }}"><img src="{{ asset('assets/img/AVAMAElogo.png') }}"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -44,7 +76,10 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Qui sommes nous ? <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ path('home')}}">Accueil <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('home')}}">A propos <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active dropdown">
                     <a class="nav-link dropdown-toggle" href="{{ path('products')}}" data-bs-toggle="dropdown">Nos produits <span class="sr-only">(current)</span></a>
@@ -60,17 +95,12 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Contact <span class="sr-only">(current)</span></a>
                 </li>
+
             </ul>
             <div class="navbar-item-custom">
-                <a href="{{ path('cart') }}">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </a>
-
-            {% if app.user %}
-                <a href="{{ path('account') }}">Mon compte <small>({{ app.user.firstname }})</small></a> | <a href="{{ path('app_logout') }}">Déconnexion</a>
-            {% else %}
-                <a href="{{ path('app_login') }}">Connexion</a> | <a href="{{ path('register') }}">Inscription</a>
-            {% endif %}
+                {{ render(controller(
+                    'App\\Controller\\SearchController::searchBar'
+                )) }}
             </div>
         </div>
     </nav>

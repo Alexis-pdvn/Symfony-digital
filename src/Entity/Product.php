@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -57,6 +59,16 @@ class Product
      * @ORM\Column(type="boolean")
      */
     private $isBest;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ProductVariantProduct::class, mappedBy="product")
+     */
+    private $variantPrice;
+
+    public function __construct()
+    {
+        $this->variantPrice = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -158,4 +170,35 @@ class Product
 
         return $this;
     }
+
+    /**
+     * @return Collection|ProductVariantProduct[]
+     */
+    public function getVariantPrice(): Collection
+    {
+        return $this->variantPrice;
+    }
+
+    public function addVariantPrice(ProductVariantProduct $variantPrice): self
+    {
+        if (!$this->variantPrice->contains($variantPrice)) {
+            $this->variantPrice[] = $variantPrice;
+            $variantPrice->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVariantPrice(ProductVariantProduct $variantPrice): self
+    {
+        if ($this->variantPrice->removeElement($variantPrice)) {
+            // set the owning side to null (unless already changed)
+            if ($variantPrice->getProduct() === $this) {
+                $variantPrice->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

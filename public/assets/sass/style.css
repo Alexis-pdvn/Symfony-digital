@@ -1,0 +1,162 @@
+body {
+  background-color: #F6F6F6 !important;
+}
+
+.fixed-top {
+  /* A modifier */
+  position: unset !important;
+}
+.fixed-top .top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  border-bottom: 2px solid #F7F6F6;
+}
+.fixed-top .top-header .navbar-item-custom {
+  display: flex;
+  align-items: center;
+}
+.fixed-top .top-header .navbar-item-custom .account_menu_hover {
+  position: relative;
+}
+.fixed-top .top-header .navbar-item-custom .account_menu_hover .hover-user {
+  padding-top: 1rem;
+  display: none;
+  position: absolute;
+  flex-direction: column;
+  width: max-content;
+  z-index: 1;
+}
+.fixed-top .top-header .navbar-item-custom .account_menu_hover:hover .hover-user {
+  display: flex;
+}
+.fixed-top .top-header span {
+  padding: 1rem 2rem;
+}
+.fixed-top .top-header span a {
+  color: #0F0F0F;
+}
+.fixed-top .top-header .nav_cart {
+  background-color: #F6F6F6;
+}
+.fixed-top .top-header .nav_cart a {
+  color: #7A7A79;
+}
+.fixed-top .navbar {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background-color: white;
+  box-shadow: 0px 12px 10px -14px rgb(0, 0, 68);
+  -webkit-box-shadow: 0px 12px 10px -14px rgb(0, 0, 68);
+  -moz-box-shadow: 0px 12px 10px -14px rgb(0, 0, 68);
+}
+.fixed-top .navbar a {
+  color: #7C7B7C;
+}
+.fixed-top .navbar .navbar-item-custom .searchBar_nav {
+  display: flex;
+  border-radius: 10px;
+  background: #F1F1F1;
+  align-items: center;
+}
+.fixed-top .navbar .navbar-item-custom .searchBar_nav_btn button {
+  color: #7C7D7C;
+  outline: none !important;
+}
+.fixed-top .navbar .navbar-item-custom .searchBar_nav_input input {
+  background: unset;
+  outline: none !important;
+  border: unset;
+}
+.fixed-top .navbar .navbar-item-custom .form-group {
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .navbar-expand {
+    -ms-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+  }
+}
+.block_login {
+  background: #FFFFFF;
+  padding: 1rem 2rem;
+  max-width: 700px;
+  margin: 2rem auto;
+}
+.block_login_input {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+.block_login_input label {
+  width: 35%;
+}
+.block_login p {
+  margin: 1rem;
+  text-align: center;
+}
+.block_login p a {
+  color: #23B9D7;
+}
+.block_login button {
+  margin: 0 auto;
+  display: flex;
+  background-color: #23B9D7;
+  color: #ffffff;
+  border: 0px;
+  padding: 0.5rem 1rem;
+}
+
+.block_register {
+  background: #FFFFFF;
+  padding: 1rem 2rem;
+  max-width: 700px;
+  margin: 2rem auto;
+  /*
+  &_input{
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      margin-top: 1rem;
+
+      label{
+          width: 35%;
+      }
+
+  }*/
+}
+.block_register .form_grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+.block_register p {
+  margin: 1rem;
+  text-align: center;
+}
+.block_register p a {
+  color: #23B9D7;
+}
+.block_register button {
+  margin: 0 auto;
+  display: flex;
+  background-color: #23B9D7;
+  color: #ffffff;
+  border: 0px;
+  padding: 0.5rem 1rem;
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,116 @@
+.fixed-top {
+
+    /* A modifier */
+    position: unset!important;
+
+    .top-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        border-bottom: 2px solid #F7F6F6;
+
+        .navbar-item-custom {
+            display: flex;
+            align-items: center;
+
+            .account_menu_hover {
+                position: relative;
+
+                .hover-user {
+                    padding-top: 1rem;
+                    display: none;
+                    position: absolute;
+                    flex-direction: column;
+                    width: max-content;
+                    z-index: 1;
+                }
+
+                &:hover {
+                    .hover-user {
+                        display: flex;
+                    }
+                }
+            }
+
+
+        }
+
+        span {
+            padding: 1rem 2rem;
+
+            a {
+                color: #0F0F0F;
+            }
+        }
+
+        .nav_cart {
+            background-color: #F6F6F6;
+
+            a {
+                color: #7A7A79;
+            }
+        }
+
+    }
+
+    .navbar {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+        background-color: white;
+        box-shadow: 0px 12px 10px -14px rgb(0, 0, 68);
+        -webkit-box-shadow: 0px 12px 10px -14px rgb(0, 0, 68);
+        -moz-box-shadow: 0px 12px 10px -14px rgb(0, 0, 68);
+
+        a {
+            color: #7C7B7C;
+        }
+
+        .navbar-item-custom {
+
+            .searchBar_nav {
+                display: flex;
+                border-radius: 10px;
+                background: #F1F1F1;
+                align-items: center;
+
+                &_btn {
+                    button {
+                        color: #7C7D7C;
+                        outline: none!important;
+                    }
+                }
+
+                &_input {
+                    input {
+                        background: unset;
+                        outline: none!important;
+                        border: unset;
+                    }
+                }
+            }
+
+            .form-group {
+                margin: 0;
+            }
+        }
+    }
+
+}
+
+@media (min-width: 768px) {
+    .navbar-expand {
+        -ms-flex-flow: row nowrap;
+        flex-flow: row nowrap;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+    }
+}
