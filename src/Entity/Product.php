@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -57,6 +59,16 @@ class Product
      * @ORM\Column(type="boolean")
      */
     private $isBest;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ProductVariantPrice::class, mappedBy="product", cascade={"persist", "remove"})
+     */
+    private $variantprice;
+
+    public function __construct()
+    {
+        $this->variantprice = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -155,6 +167,36 @@ class Product
     public function setIsBest(bool $isBest): self
     {
         $this->isBest = $isBest;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProductVariantPrice[]
+     */
+    public function getVariantprice(): Collection
+    {
+        return $this->variantprice;
+    }
+
+    public function addVariantprice(ProductVariantPrice $variantprice): self
+    {
+        if (!$this->variantprice->contains($variantprice)) {
+            $this->variantprice[] = $variantprice;
+            $variantprice->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVariantprice(ProductVariantPrice $variantprice): self
+    {
+        if ($this->variantprice->removeElement($variantprice)) {
+            // set the owning side to null (unless already changed)
+            if ($variantprice->getProduct() === $this) {
+                $variantprice->setProduct(null);
+            }
+        }
 
         return $this;
     }

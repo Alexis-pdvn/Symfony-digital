@@ -37,6 +37,7 @@ class ProductCrudController extends AbstractCrudController
             /*Pour plusieurs categories
             CollectionField::new('category')*/
             AssociationField::new('category'),
+            AssociationField::new('variantprice'),
         ];
     }
     
