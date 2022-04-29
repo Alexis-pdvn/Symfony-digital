@@ -26,26 +26,34 @@
                 </th>
                 <td>
                     {{ product.product.name }}<br>
-                    <small>{{ product.product.subtitle }}</small>
+                    <small>{{ (product.size.size) }}</small>
                 </td>
                 <td>
-                    <a href="{{ path('decrease_to_add',  {'id' : product.product.id }) }}">
-                        <i class="fa-solid fa-minus"></i>
-                    </a>
+                    <form action="{{ path('decrease_to_add') }}" method="post">
+                        <input type="hidden" name="id_produit" value="{{product.product.id}}" />
+                        <input type="hidden" id="id_size" name="id_size" value="{{product.size.id}}" />
+                        <input type="submit" value="-">
+                    </form>
                     x {{ product.quantity }}
-                    <a href="{{ path('add_to_cart',  {'id' : product.product.id }) }}">
-                        <i class="fa-solid fa-plus"></i>
-                    </a>
+                    <form action="{{ path('add_to_cart') }}" method="post">
+                        <input type="hidden" name="id_produit" value="{{product.product.id}}" />
+                        <input type="hidden" id="id_size" name="id_size" value="{{product.size.id}}" />
+                        <input type="submit" value="+">
+                    </form>
                 </td>
-                <td>{{ (product.product.price / 100)|number_format(2, ',', '.') }}€</td>
-                <td>{{ ((product.product.price * product.quantity ) / 100)|number_format(2, ',', '.') }}€</td>
+                <td>{{ (product.size.price / 100)|number_format(2, ',', '.') }}€</td>
+                <td>{{ ((product.size.price * product.quantity ) / 100)|number_format(2, ',', '.') }}€</td>
                 <td>
-                    <a href="{{ path('delete_to_cart', {'id' : product.product.id } ) }}">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </a>
+                    <form action="{{ path('delete_to_cart') }}" method="post">
+                        <input type="hidden" name="id_produit" value="{{product.product.id}}" />
+                        <input type="hidden" id="id_size" name="id_size" value="{{product.size.id}}" />
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </form>
                 </td>
             </tr>
-                {% set total = total + (product.product.price * product.quantity ) %}
+                {% set total = total + (product.size.price * product.quantity ) %}
             {% endfor %}
             </tbody>
         </table>

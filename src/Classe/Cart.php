@@ -4,12 +4,13 @@ namespace App\Classe;
 
 
 use App\Entity\Product;
+use App\Entity\Variant;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class Cart
 {
-    private $section;
+    private $session;
     private $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager, SessionInterface $session)
@@ -18,16 +19,14 @@ class Cart
         $this->entityManager = $entityManager;
     }
 
-    public function add($id)
+    public function add($id, $productVariantion)
     {
         $cart = $this->session->get('cart', []);
-
-        if (!empty($cart[$id])) {
-            $cart[$id]++;
+        if (!empty($cart[$id.'_'.$productVariantion])) {
+            $cart[$id.'_'.$productVariantion]++;
         }else{
-            $cart[$id] = 1;
+            $cart[$id.'_'.$productVariantion] = 1;
         }
-
         $this->session->set('cart', $cart);
 
     }
@@ -42,23 +41,23 @@ class Cart
         return $this->session->remove('cart');
     }
 
-    public function delete($id)
+    public function delete($id, $productVariantion)
     {
         $cart = $this->session->get('cart', []);
 
-        unset($cart[$id]);
+        unset($cart[$id.'_'.$productVariantion]);
 
         return $this->session->set('cart', $cart);
     }
 
-    public function decrease($id)
+    public function decrease($id, $productVariantion)
     {
         $cart = $this->session->get('cart', []);
 
-        if ($cart[$id] > 1){
-            $cart[$id]--;
+        if ($cart[$id.'_'.$productVariantion] > 1){
+            $cart[$id.'_'.$productVariantion]--;
         }else{
-            unset($cart[$id]);
+            unset($cart[$id.'_'.$productVariantion]);
         }
 
         return $this->session->set('cart', $cart);
@@ -71,7 +70,9 @@ class Cart
 
         if ($this->get()){
             foreach ($this->get() as $id => $quantity){
-                $product_object = $this->entityManager->getRepository(Product::class)->findOneById($id);
+                $product_object = $this->entityManager->getRepository(Product::class)->findOneById(explode('_', $id)[0]);
+                $size = $this->entityManager->getRepository(Variant::class)->findOneById(explode('_', $id)[1]);
+
                 if(!$product_object){
                     $this->delete($id);
                     continue;
@@ -79,9 +80,9 @@ class Cart
 
                 $cartComplete[] = [
                     'product' => $product_object,
+                    'size' => $size,
                     'quantity' => $quantity
                 ];
-
             }
         }
 

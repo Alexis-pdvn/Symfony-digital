@@ -24,7 +24,9 @@
             -ms-user-select: none;
             user-select: none;
         }
-
+.btn-choice-display{
+    display: none;
+}
         @media (min-width: 768px) {
             .bd-placeholder-img-lg {
                 font-size: 3.5rem;
@@ -131,5 +133,28 @@
 <script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
 </body>
 {% block script %}
+    <script>
+/*
+        const selectElement = document.querySelector('.form-select');
+        const Alloption = document.querySelectorAll('.form-select option');
+        const Allbtn = document.querySelectorAll('.btn-choice-display');
+
+        Allbtn[0].classList.remove('btn-choice-display');
+
+        selectElement.addEventListener('change', (event) => {
+            for ( let numb=0; numb<Alloption.length; numb++){
+                Allbtn[numb].classList.add('btn-choice-display');
+                if (Alloption[numb].value == selectElement.value){
+                    console.log(Allbtn[numb])
+                    Allbtn[numb].classList.remove('btn-choice-display');
+                }
+            }
+        });*/
+
+    function affectSizeHidden(id){
+        document.getElementById('id_size').value = id;
+    }
+
+    </script>
 {% endblock %}
 </html>

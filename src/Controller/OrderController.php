@@ -64,16 +64,16 @@ class OrderController extends AbstractController
             $carriers = $form->get('carriers')->getData();
             $delivery = $form->get('addresses')->getData();
             $delivery_content = $delivery->getFirstname().' '.$delivery->getLastname();
-            $delivery_content .= '<br/>'.$delivery->getPhone();
+            $delivery_content .= "<br/>".$delivery->getPhone();
 
             if ($delivery->getCompany())
             {
-                $delivery_content .= '<br/>'.$delivery->getCompany();
+                $delivery_content .= "<br/>".$delivery->getCompany();
             }
 
-            $delivery_content .= '<br/>'.$delivery->getAddress();
-            $delivery_content .= '<br/>'.$delivery->getPostal().' '.$delivery->getCity();
-            $delivery_content .= '<br/>'.$delivery->getCountry();
+            $delivery_content .= "<br/>".$delivery->getAddress();
+            $delivery_content .= "<br/>".$delivery->getPostal().' '.$delivery->getCity();
+            $delivery_content .= "<br/>".$delivery->getCountry();
 
             // Enregistrer ma commandes Order()
             $order = new Order();
@@ -94,8 +94,9 @@ class OrderController extends AbstractController
                 $orderDetails->setMyOrder($order);
                 $orderDetails->setProduct($product['product']->getName());
                 $orderDetails->setQuantity($product['quantity']);
-                $orderDetails->setPrice($product['product']->getPrice());
-                $orderDetails->setTotal($product['product']->getPrice() * $product['quantity']);
+                $orderDetails->setPrice($product['size']->getPrice());
+                $orderDetails->setTotal($product['size']->getPrice() * $product['quantity']);
+                $orderDetails->setSize($product['size']->getSize());
                 $this->entitymanager->persist($orderDetails);
             }
 

@@ -41,14 +41,14 @@
                         <div class="col-8 my-auto">
                             {{ product.product.name }}<br>
                             <small>
-                                {{ product.product.subtitle }}<br>
+                                {{ product.size.size }}<br>
                                 x {{ product.quantity }}
                             </small>
                         </div>
-                        <div class="col-2 my-auto">{{ ((product.product.price * product.quantity ) / 100)|number_format(2, ',', '.') }}€</div>
+                        <div class="col-2 my-auto">{{ ((product.size.price * product.quantity ) / 100)|number_format(2, ',', '.') }}€</div>
                     </div>
 
-                    {% set total = total + (product.product.price * product.quantity ) %}
+                    {% set total = total + (product.size.price * product.quantity ) %}
                 {% endfor %}
             </div>
 

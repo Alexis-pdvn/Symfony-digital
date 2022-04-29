@@ -15,7 +15,21 @@
             <span class="product-page-price">{{ (product.price / 100)|number_format(2, ',', '.') }}€</span>
             <hr>
             <p>{{ product.description }}</p>
-            <a href="{{ path('add_to_cart', {'id' : product.id }) }}" class="btn btn-primary">Ajouter au panier</a>
+
+            <select class="form-select" aria-label="Default select example" onchange="affectSizeHidden(this.value)">
+                {% for size in size %}
+                    <div class="col-md-3">
+                        <option value="{{ size.id }}" class="option_value">{{ size.size }}</option>
+                    </div>
+                {% endfor %}
+            </select>
+
+            <form action="{{ path('add_to_cart') }}" method="post">
+                <input type="hidden" name="id_produit" value="{{product.id}}" />
+                <input type="hidden" id="id_size" name="id_size" value="1" />
+                <input type="submit" value="Add">
+            </form>
+
         </div>
 
     </div>

@@ -6,6 +6,7 @@ use App\Classe\Cart;
 use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -30,12 +31,13 @@ class CartController extends AbstractController
     }
 
     /**
-     * @Route("/cart/add/{id}", name="add_to_cart")
+     * @Route("/cart/add/", name="add_to_cart")
      */
-    public function add(Cart $cart, $id): Response
+    public function add(Cart $cart, Request $request): Response
     {
-        $cart->add($id);
-
+        $idproduit = $request->get('id_produit');
+        $idsize = $request->get('id_size');
+        $cart->add($idproduit, $idsize);
         return $this->redirectToRoute('cart');
     }
 
@@ -50,21 +52,26 @@ class CartController extends AbstractController
     }
 
     /**
-     * @Route("/cart/delete/{id}", name="delete_to_cart")
+     * @Route("/cart/delete/", name="delete_to_cart")
      */
-    public function delete(Cart $cart, $id): Response
+    public function delete(Cart $cart, Request $request): Response
     {
-        $cart->delete($id);
+        $idproduit = $request->get('id_produit');
+        $idsize = $request->get('id_size');
+
+        $cart->delete($idproduit, $idsize);
 
         return $this->redirectToRoute('cart');
     }
 
     /**
-     * @Route("/cart/decrease/{id}", name="decrease_to_add")
+     * @Route("/cart/decrease/", name="decrease_to_add")
      */
-    public function decrease(Cart $cart, $id): Response
+    public function decrease(Cart $cart, Request $request): Response
     {
-        $cart->decrease($id);
+        $idproduit = $request->get('id_produit');
+        $idsize = $request->get('id_size');
+        $cart->decrease($idproduit, $idsize);
 
         return $this->redirectToRoute('cart');
     }

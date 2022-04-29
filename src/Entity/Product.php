@@ -61,13 +61,13 @@ class Product
     private $isBest;
 
     /**
-     * @ORM\OneToMany(targetEntity=ProductVariantPrice::class, mappedBy="product", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity=Variant::class, inversedBy="products")
      */
-    private $variantprice;
+    private $productVariantion;
 
     public function __construct()
     {
-        $this->variantprice = new ArrayCollection();
+        $this->productVariantion = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -172,32 +172,28 @@ class Product
     }
 
     /**
-     * @return Collection|ProductVariantPrice[]
+     * @return Collection|Variant[]
      */
-    public function getVariantprice(): Collection
+    public function getProductVariantion(): Collection
     {
-        return $this->variantprice;
+        return $this->productVariantion;
     }
 
-    public function addVariantprice(ProductVariantPrice $variantprice): self
+    public function addProductVariantion(Variant $productVariantion): self
     {
-        if (!$this->variantprice->contains($variantprice)) {
-            $this->variantprice[] = $variantprice;
-            $variantprice->setProduct($this);
+        if (!$this->productVariantion->contains($productVariantion)) {
+            $this->productVariantion[] = $productVariantion;
         }
 
         return $this;
     }
 
-    public function removeVariantprice(ProductVariantPrice $variantprice): self
+    public function removeProductVariantion(Variant $productVariantion): self
     {
-        if ($this->variantprice->removeElement($variantprice)) {
-            // set the owning side to null (unless already changed)
-            if ($variantprice->getProduct() === $this) {
-                $variantprice->setProduct(null);
-            }
-        }
+        $this->productVariantion->removeElement($productVariantion);
 
         return $this;
     }
+
+
 }

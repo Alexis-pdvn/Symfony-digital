@@ -73,6 +73,7 @@ class Order
 
     public function getTotal()
     {
+
         $total = null;
 
         foreach ($this->getOrderDetails()->getValues() as $product) {

@@ -43,9 +43,14 @@ class OrderDetails
      */
     private $total;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $size;
+
     public function __toString()
     {
-        return $this->getProduct().' x'.$this->getQuantity();
+        return $this->getProduct().' x'.$this->getQuantity().' - '.$this->getSize();
     }
 
     public function getId(): ?int
@@ -109,6 +114,18 @@ class OrderDetails
     public function setTotal(float $total): self
     {
         $this->total = $total;
+
+        return $this;
+    }
+
+    public function getSize(): ?string
+    {
+        return $this->size;
+    }
+
+    public function setSize(string $size): self
+    {
+        $this->size = $size;
 
         return $this;
     }

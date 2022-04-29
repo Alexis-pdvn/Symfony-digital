@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Classe\Search;
 use App\Entity\Category;
 use App\Entity\Product;
+use App\Entity\Variant;
 use App\Form\SearchType;
+use App\Repository\VariantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,6 +31,7 @@ class ProductController extends AbstractController
 
         $products = $this->entityManager->getRepository(Product::class)->findAll();
 
+
         $search = new Search();
         $form = $this->createForm(SearchType::class, $search);
 
@@ -47,11 +50,12 @@ class ProductController extends AbstractController
     /**
      * @Route("/produit/{slug}", name="product")
      */
-    public function show($slug): Response
+    public function show($slug, VariantRepository $variantRepository): Response
     {
 
         $product = $this->entityManager->getRepository(Product::class)->findOneBySlug($slug);
         $products = $this->entityManager->getRepository(Product::class)->findByisBest(1);
+        $size = $this->entityManager->getRepository(Variant::class)->findAll();
 
         if (!$product) {
             return $this->redirectToRoute('products');
@@ -59,7 +63,8 @@ class ProductController extends AbstractController
 
         return $this->render('product/show.html.twig', [
             'product' => $product,
-            'products' => $products
+            'products' => $products,
+            'size' => $size,
         ]);
     }
 

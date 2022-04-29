@@ -7,8 +7,8 @@ use App\Entity\Category;
 use App\Entity\Header;
 use App\Entity\Order;
 use App\Entity\Product;
-use App\Entity\ProductVariantPrice;
 use App\Entity\User;
+use App\Entity\Variant;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -40,6 +40,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Produits', 'fas fa-tag', Product::class);
         yield MenuItem::linkToCrud('Transporteur', 'fas fa-truck', Carrier::class);
         yield MenuItem::linkToCrud('Carrousel', 'fas fa-desktop', Header::class);
-        yield MenuItem::linkToCrud('Tailles', 'fas fa-desktop', ProductVariantPrice::class);
+        yield MenuItem::linkToCrud('Tailles', 'fas fa-desktop', Variant::class);
     }
 }

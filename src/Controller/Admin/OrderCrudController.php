@@ -97,7 +97,7 @@ class OrderCrudController extends AbstractCrudController
             IdField::new('id'),
             DateTimeField::new('createdAt', 'Passée le'),
             TextField::new('user.fullname', 'Utilisateur'),
-            TextEditorField::new('delivery', 'Adresse de livraison')->onlyOnDetail(),
+            TextEditorField::new('delivery', 'Adresse de livraison')->formatValue(function ($value) { return $value; })->onlyOnDetail(),
             MoneyField::new('total', 'Total produit')->setCurrency('EUR'),
             TextField::new('carrierName', 'Transporteur'),
             MoneyField::new('carrierPrice', 'Frais de port')->setCurrency('EUR'),
@@ -107,7 +107,7 @@ class OrderCrudController extends AbstractCrudController
                 'Préparation en cours' => 2,
                 'Livraison en cours' => 3
             ]),
-            ArrayField::new('orderDetails', 'Produits achetés')->hideOnIndex()
+            ArrayField::new('orderDetails', 'Produits achetés')->hideOnIndex(),
         ];
     }
 

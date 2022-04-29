@@ -3,7 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Product;
+use App\Form\SizeType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
@@ -37,7 +39,7 @@ class ProductCrudController extends AbstractCrudController
             /*Pour plusieurs categories
             CollectionField::new('category')*/
             AssociationField::new('category'),
-            AssociationField::new('variantprice'),
+            AssociationField::new('productVariantion'),
         ];
     }
     
