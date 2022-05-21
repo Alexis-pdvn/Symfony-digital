@@ -1,0 +1,18 @@
+{% for category in category %}
+    <div class="category_list_card">
+        <a href="{{ path('category', {name: category.name}) }}">
+            <div style="background-image: url('/category/{{ category.image }}'); 
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 400px;
+    width: 300px;
+    position: relative;
+    background-size: cover;">
+
+            <p class="category_list_card_name">
+                {{ category.name }}
+            </p>
+            </div>
+        </a>
+    </div>
+{% endfor %}

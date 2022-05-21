@@ -6,14 +6,6 @@ body{
     position: relative;
 }
 
-.footer-custom{
-    text-align: center;
-    position: absolute;
-    width: 100%;
-    background-color: aquamarine;
-    padding-top: 25px;
-}
-
 .product-container{
     margin-bottom: 150px;
 }

@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Classe\Cart;
-use App\Entity\Product;
+use App\Entity\Carrier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,10 @@ class CartController extends AbstractController
      */
     public function index(Cart $cart): Response
     {
+        $carrier = $this->entityManager->getRepository(Carrier::class)->findAll();
+
         return $this->render('cart/index.html.twig', [
+            'carrier' => $carrier,
             'cart' => $cart->getFull()
         ]);
     }

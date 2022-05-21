@@ -1,69 +1,168 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon panier{% endblock %}
+{% block title %}Mon panier
+{% endblock %}
 
 {% block content %}
-    <h1>Mon panier</h1>
+	<h1>Mon panier</h1>
 
-    {% if cart|length > 0 %}
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">Produit</th>
-                <th scope="col"></th>
-                <th scope="col">Quantité</th>
-                <th scope="col">Prix</th>
-                <th scope="col">Total</th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            {% set total = null %}
-            {% for product in cart %}
-            <tr>
-                <th>
-                    <img src="/uploads/{{ product.product.image }}" alt="{{ product.product.name }}" height="80px"><br>
-                </th>
-                <td>
-                    {{ product.product.name }}<br>
-                    <small>{{ (product.size.size) }}</small>
-                </td>
-                <td>
-                    <form action="{{ path('decrease_to_add') }}" method="post">
-                        <input type="hidden" name="id_produit" value="{{product.product.id}}" />
-                        <input type="hidden" id="id_size" name="id_size" value="{{product.size.id}}" />
-                        <input type="submit" value="-">
-                    </form>
-                    x {{ product.quantity }}
-                    <form action="{{ path('add_to_cart') }}" method="post">
-                        <input type="hidden" name="id_produit" value="{{product.product.id}}" />
-                        <input type="hidden" id="id_size" name="id_size" value="{{product.size.id}}" />
-                        <input type="submit" value="+">
-                    </form>
-                </td>
-                <td>{{ (product.size.price / 100)|number_format(2, ',', '.') }}€</td>
-                <td>{{ ((product.size.price * product.quantity ) / 100)|number_format(2, ',', '.') }}€</td>
-                <td>
-                    <form action="{{ path('delete_to_cart') }}" method="post">
-                        <input type="hidden" name="id_produit" value="{{product.product.id}}" />
-                        <input type="hidden" id="id_size" name="id_size" value="{{product.size.id}}" />
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                    </form>
-                </td>
-            </tr>
-                {% set total = total + (product.size.price * product.quantity ) %}
-            {% endfor %}
-            </tbody>
-        </table>
-        <div class="text-right mb-5">
-            <b>Nombre de produit :</b> {{ cart|length }}<br>
-            <b>Total panier :</b> {{ (total/ 100)|number_format(2, ',', '.') }}€<br>
-            <a href="{{ path('order') }}" class="btn btn-success btn-block">Valider le panier</a>
-        </div>
-    {% else %}
-        <hr>
-        <p><b>Votre panier est vide.</b></p>
+	{% if cart|length > 0 %}
+		<div class="cart">
+			<ul class="cart_list">
+				<li class="cart_list_head">
+					<span>Produit</span>
+					<span>Prix</span>
+					<span>Quantité</span>
+					<span>Sous-total</span>
+				</li>
+
+				{% set total = null %}
+				{% for product in cart %}
+					<li class="cart_list_content">
+						<div class="cart_list_content_img">
+							<img src="/uploads/{{ product.product.image }}" alt="{{ product.product.name }}" diveight="80px">
+							<div> {{ product.product.name }}<br>
+								<small>{{ (product.size.size) }}</small>
+							</div>
+						</div>
+
+						<p class="cart_list_content_total">{{ (product.size.price / 100)|number_format(2, ',', '.') }}€</p>
+
+						<div class="cart_list_content_qty">
+							<form action="{{ path('decrease_to_add') }}" method="post">
+								<input type="hidden" name="id_produit" value="{{product.product.id}}"/>
+								<input type="hidden" id="id_size" name="id_size" value="{{product.size.id}}"/>
+								<input type="submit" class="btn_minus" value="-">
+							</form>
+							<span>{{ product.quantity }}</span>
+							<form action="{{ path('add_to_cart') }}" method="post">
+								<input type="hidden" name="id_produit" value="{{product.product.id}}"/>
+								<input type="hidden" id="id_size" name="id_size" value="{{product.size.id}}"/>
+								<input type="submit" class="btn_plus" value="+">
+							</form>
+						</div>
+
+						<p class="cart_list_content_sous-total">{{ ((product.size.price * product.quantity ) / 100)|number_format(2, ',', '.') }}€</p>
+
+
+						<form class="cart_list_content_delete" action="{{ path('delete_to_cart') }}" method="post">
+							<input type="hidden" name="id_produit" value="{{product.product.id}}"/>
+							<input type="hidden" id="id_size" name="id_size" value="{{product.size.id}}"/>
+							<button type="submit" class="btn_delete_item">
+								<i class="fa-solid fa-trash-can"></i>
+							</button>
+						</form>
+					</li>
+
+						{% set total = total + (product.size.price * product.quantity ) %}
+				{% endfor %}
+			</ul>
+			<div class="cart_total">
+
+				<p class="cart_total_p">Total panier<span> {{ cart|length }} Produit(s)</span>
+				</p>
+
+				<div class="cart_total_content">
+
+					<div class="cart_total_content_total">
+						<p class="libelle">
+							Total
+						</p>
+						<p class="prix"> {{ (total/ 100)|number_format(2, ',', '.') }}€
+						</p>
+					</div>
+
+					<div class="cart_total_content_carrier">
+						{% for carrier in carrier %}
+						{% if loop.first %}
+						<p class="libelle">
+							Expédition<span> ({{carrier.name}})</span>
+						</p>
+						<p class="prix"> {{(carrier.price/ 100)|number_format(2, ',', '.') }}€
+						</p>
+						{% set total = total + carrier.price %}
     {% endif %}
+						{% endfor %}
+					</div>
+
+					<div class="cart_total_content_subtotal">
+						<p class="libelle">
+							Sous-total
+						</p>
+						<p class="prix">
+						{{ (total/ 100)|number_format(2, ',', '.') }}€
+						</p>
+					</div>
+
+				</div>
+				<div class="cart_total_btn">
+				<a class="cart_total_btn_a" href="{{ path('order') }}">Valider le panier</a>
+				</div>
+			</div>
+		</div>
+	{% else %}
+
+		<p>
+			<b>Votre panier est vide.</b>
+		</p>
+	{% endif %}
 {% endblock %}
+{# <table>
+					<thead>
+						<tr>
+							<th>Produit</th>
+							<th></th>
+							<th>Prix</th>
+							<th>Quantité</th>
+							<th>Sous-total</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody> 
+		{% set total = null %}
+	{% for product in cart %}
+						<tr style="padding:1rem;">
+								<th>
+									<img src="/uploads/{{ product.product.image }}" alt="{{ product.product.name }}" height="80px"><br>
+								</th>
+								<td> {{ product.product.name }}<br>
+									<small>{{ (product.size.size) }}</small>
+								</td>
+								<td>
+									<form action="{{ path('decrease_to_add') }}" method="post">
+										<input type="hidden" name="id_produit" value="{{product.product.id}}"/>
+										<input type="hidden" id="id_size" name="id_size" value="{{product.size.id}}"/>
+										<input type="submit" value="-">
+									</form>
+									x {{ product.quantity }}
+									<form action="{{ path('add_to_cart') }}" method="post">
+										<input type="hidden" name="id_produit" value="{{product.product.id}}"/>
+										<input type="hidden" id="id_size" name="id_size" value="{{product.size.id}}"/>
+										<input type="submit" value="+">
+									</form>
+								</td>
+								<td>{{ (product.size.price / 100)|number_format(2, ',', '.') }}€</td>
+								<td>{{ ((product.size.price * product.quantity ) / 100)|number_format(2, ',', '.') }}€</td>
+								<td>
+									<form action="{{ path('delete_to_cart') }}" method="post">
+										<input type="hidden" name="id_produit" value="{{product.product.id}}"/>
+										<input type="hidden" id="id_size" name="id_size" value="{{product.size.id}}"/>
+										<button type="submit" class="btn btn-primary">
+											<i class="fa-solid fa-trash-can"></i>
+										</button>
+									</form>
+								</td>
+							</tr>
+							{% set total = total + (product.size.price * product.quantity ) %}
+						{% endfor %} 
+	</tbody>
+</table>
+<div>
+	<b>Nombre de produit :</b> {{ cart|length }}<br>
+	<b>Total panier :</b> {{ (total/ 100)|number_format(2, ',', '.') }}€<br>
+	<a href="{{ path('order') }}">Valider le panier</a>
+</div>{% else %}
+<hr>
+<p>
+	<b>Votre panier est vide.</b>
+</p>{% endif %}{% endblock %} #}

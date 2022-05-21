@@ -1,30 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CategoryController!{% endblock %}
+{% block title %}Hello CategoryController!
+{% endblock %}
 
 {% block content %}
 
-    <div class="row">
-        <div class="col-md-9">
-            <h3>Nos produits de la {{ cat.name }}</h3>
+	<div class="category_page container">
+		<h3>Produits de la catégorie {{ cat.name }}</h3>
 
-            <div class="row product-container">
+		<div class="product_category">
 
-                {% for product in product_cat %}
-                    <div class="col-md-4">
-                        <div class="product-item text-center">
-                            <a href="{{ path('product', { 'slug' : product.slug }) }}">
-                                <img src="/uploads/{{ product.image }}" alt="{{ product.name }}" class="img-fluid">
-                            </a>
-                            <h5>{{ product.name }}</h5>
-                            <span class="product-subtitle">{{ product.subtitle }}</span>
-                            <span class="product-price">{{ (product.price / 100)|number_format(2, ',', '.') }}€</span>
-                        </div>
-                    </div>
-                {% endfor %}
+			{% for product in product_cat %}
+				<div class="product_category_card">
+					<div class="product_category_card_item">
+						<a href="{{ path('product', { 'slug' : product.slug }) }}">
+							<div class="img_hover" style="position:relative">
+								<img  src="/uploads/{{ product.image }}" style="width: -webkit-fill-available;">
+								<div class="product_category_card_item_hover" >
+									<i class="fa-solid fa-eye"></i>
+								</div>
+							</div>
+							<h5 class="product-name">{{ product.name }}</h5>
+							<span class="product-price">À partir de <b>{{ (product.price / 100)|number_format(2, ',', '.') }}€</b></span>
+						</a>
+					</div>
+				</div>
+			{% endfor %}
 
-            </div>
-        </div>
-    </div>
+		</div>
+
+	</div>
+
+	
 
 {% endblock %}

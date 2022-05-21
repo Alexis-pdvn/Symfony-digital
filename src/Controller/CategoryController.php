@@ -23,7 +23,8 @@ class CategoryController extends AbstractController
      */
     public function index($name): Response
     {
-
+        
+        $products = $this->entityManager->getRepository(Product::class)->findByisBest(1);
         $cat = $this->entityManager->getRepository(Category::class)->findOneBy(array('name' => $name));
 
         if (!$cat) {
@@ -34,6 +35,7 @@ class CategoryController extends AbstractController
 
         return $this->render('category/index.html.twig', [
             'cat' => $cat,
+            'products' => $products,
             'product_cat' => $product_cat
         ]);
     }
@@ -44,6 +46,16 @@ class CategoryController extends AbstractController
 
         return $this->render(
             'category/category_nav.html.twig',
+            ['category' => $category]
+        );
+    }
+    
+    public function CategoryHome()
+    {
+        $category = $this->entityManager->getRepository(Category::class)->findAll();
+
+        return $this->render(
+            'category/category_home.html.twig',
             ['category' => $category]
         );
     }

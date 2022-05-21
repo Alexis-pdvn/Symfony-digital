@@ -1,0 +1,96 @@
+.home_title, .home_title_cat {
+    font: normal normal 900 65px/120px Poppins;
+    position: relative;
+    color: #54595F;
+    margin-bottom: 70px;
+    overflow: hidden;
+
+    &::after{
+        position: absolute;
+        content: " ";
+        width: 1000px;
+        height: 22px;
+        top:50%;
+        background-color: #F9CDCB;
+        margin-left: 3rem;
+
+    }
+}
+
+.home_title_cat{
+    margin-top: 70px;
+}
+
+.best-seller{
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &_card {
+
+        overflow: hidden;
+
+        &_content_product {
+            position: absolute;
+            bottom: -62.38px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            background: #F9CDCB;
+            padding: 0.7rem;
+            color: #54595F;
+            transition: .2s linear;
+            opacity: 0;
+
+            div {
+
+                line-height: 25px;
+
+                .product_name {
+                    font: normal normal 600 15px/15px Poppins;
+                }
+
+                .product_price {
+                    font: normal normal 400 13px/13px Poppins
+                }
+
+            }
+
+        }
+
+        a:hover .best-seller_card_content_product{
+            bottom: 0px;
+            opacity: 1;
+        }
+
+        &:hover{
+        box-shadow: 0px 0px 10px #00000010;
+        }
+
+    }
+
+}
+
+.category_list{
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    a{
+        text-decoration: none;
+    }
+
+    &_card a div{
+    box-shadow: inset 0px 35px 35px #00000080;
+
+    p{    
+        font: normal normal 300 25px/25px Poppins;
+        letter-spacing: 0px;
+        color: #fff;
+        margin: 20px;
+        position: absolute;
+    }
+    }
+}

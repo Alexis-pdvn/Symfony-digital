@@ -1,45 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ product.name }} !{% endblock %}
+{% block title %} {{ product.name }}
+{% endblock %}
 
 {% block content %}
 
-    <div class="row">
+	<div class="product_show">
 
-        <div class="col-md-5">
-            <img src="/uploads/{{ product.image }}" alt="{{ product.name }}" class="img-fluid">
-        </div>
-        <div class="col-md-7 my-auto">
-            <h3>{{ product.name }}</h3>
-            <p>{{ product.subtitle }}</p>
-            <span class="product-page-price">{{ (product.price / 100)|number_format(2, ',', '.') }}€</span>
-            <hr>
-            <p>{{ product.description }}</p>
+		<div class="product_show_img">
+			<img src="/uploads/{{ product.image }}" alt="{{ product.name }}">
+		</div>
+		<div class="product_show_content">
+			<h3>{{ product.name }}</h3>
+			<hr>
+			<span class="product-page-price">A partir de
+				<b>{{ (product.price / 100)|number_format(2, ',', '.') }}€</b>
+			</span>
+			<p class="product-page-subtitle">{{ product.subtitle }}</p>
+			<p class="product-page-description">{{ product.description }}</p>
 
-            <select class="form-select" aria-label="Default select example" onchange="affectSizeHidden(this.value)">
-                {% for size in size %}
-                    <div class="col-md-3">
-                        <option value="{{ size.id }}" class="option_value">{{ size.size }}</option>
-                    </div>
-                {% endfor %}
-            </select>
+			<div class="product-page-select">
+                <p>Dimensions :</p>
+				<select class="form-select" aria-label="Default select example" onchange="affectSizeHidden(this.value)">
+					{% for size in size %}
+						<div>
+							<option value="{{ size.id }}" class="option_value">{{ size.size }}</option>
+						</div>
+					{% endfor %}
+				</select>
+			</div>
 
-            <form action="{{ path('add_to_cart') }}" method="post">
-                <input type="hidden" name="id_produit" value="{{product.id}}" />
-                <input type="hidden" id="id_size" name="id_size" value="1" />
-                <input type="submit" value="Add">
-            </form>
+			<form action="{{ path('add_to_cart') }}" method="post">
+				<input type="hidden" name="id_produit" value="{{product.id}}"/>
+				<input type="hidden" id="id_size" name="id_size" value="1"/>
+				<input class="btn_add_cart" type="submit" value="Ajouter au panier">
+			</form>
 
-        </div>
+		</div>
 
-    </div>
-<hr>
-    <h2>Nos meilleurs ventes</h2>
-    <div class="row">
-        {% for product in products %}
-            <div class="col-md-3">
-                {% include 'product/single.html.twig' %}
-            </div>
-        {% endfor %}
-    </div>
+	</div>
+
+	<h2 class="home_title">Meilleures ventes</h2>
+	<div class="best-seller">
+		{% for product in products %}
+			{% include 'product/single.html.twig' %}
+		{% endfor %}
+	</div>
 {% endblock %}
