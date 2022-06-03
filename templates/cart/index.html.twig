@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block content %}
-	<h1>Mon panier</h1>
+	<h1 class="cart_h1">Mon panier</h1>
 
 	{% if cart|length > 0 %}
 		<div class="cart">
@@ -22,7 +22,11 @@
 						<div class="cart_list_content_img">
 							<img src="/uploads/{{ product.product.image }}" alt="{{ product.product.name }}" diveight="80px">
 							<div> {{ product.product.name }}<br>
+							
+							{% if product.size.size|length > 1 %}
+							
 								<small>{{ (product.size.size) }}</small>
+							{% endif %}
 							</div>
 						</div>
 

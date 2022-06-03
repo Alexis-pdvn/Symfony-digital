@@ -14,8 +14,14 @@
 				<div class="product_category_card">
 					<div class="product_category_card_item">
 						<a href="{{ path('product', { 'slug' : product.slug }) }}">
-							<div class="img_hover" style="position:relative">
-								<img  src="/uploads/{{ product.image }}" style="width: -webkit-fill-available;">
+							<div class="img_hover" style="position:relative;
+    background-image: url('/uploads/{{ product.image }}');
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 425px;
+    width: 300px;
+    position: relative;
+    background-size: cover;">
 								<div class="product_category_card_item_hover" >
 									<i class="fa-solid fa-eye"></i>
 								</div>

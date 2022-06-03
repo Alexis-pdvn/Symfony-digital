@@ -25,7 +25,9 @@ class ContactController extends AbstractController
             $mail = new MailContact();
             $prenom = $form->get('prenom')->getData();
             $nom = $form->get('nom')->getData();
+            $nom = $form->get('number')->getData();
             $email = $form->get('email')->getData();
+            $nom = $form->get('objet')->getData();
             $content = $form->get('content')->getData();
             $mail->send('avamae.projet@gmail.com','AVAMAE','Demande de contact', $prenom, $nom, $email, $content,);
         }

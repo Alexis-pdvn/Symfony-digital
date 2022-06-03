@@ -1,0 +1,58 @@
+.return_account{
+    font: normal normal 600 17px/30px Poppins;
+    margin-top: 29px;
+    color: #F9CDCB;
+}
+
+.table_order {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+    margin-bottom: 100px;
+
+    thead {
+        font: normal normal 200 17px Poppins;
+        color: #54595F;
+        line-height: 50px;
+
+        .product,
+        .total {
+            text-align: center;
+        }
+    }
+
+    tbody {
+        font: normal normal normal 17px Poppins;
+        color: #737373;
+
+        .table_order_item {
+            border-top: 1px solid #707070;
+            line-height: 55px;
+
+            &_detail,
+            &_price,
+            &_btn_show {
+                text-align: center!important;
+            }
+
+            &_btn_show a i{
+                color: #F9CDCB;
+                background-color: #ffffff;
+                border: 1px solid #F9CDCB;
+                transition: linear .2s;
+                font-size: 20px;
+                padding: 0.5rem;
+                border-radius: 100%;
+                transition: linear .2s;
+            }
+            
+            &_btn_show a:hover i{
+                color: white;
+                background-color: #F9CDCB;
+            }
+
+        }
+
+    }
+
+}

@@ -18,13 +18,15 @@ class RegisterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstname', TextType::class, [
-                'label' => 'Votre prénom',
-                'constraints' => new Length([
-                    'min' => 2,
-                    'max' => 30
+        // Les add correspondent tous a des inputs/champs
+        
+            ->add('firstname', TextType::class, [   // Input type: ici c'est un input type="text"
+                'label' => 'Votre prénom',          // label: C'est le text qui définit l'input
+                'constraints' => new Length([       // constraints: ajout de contrainte sur l'input
+                    'min' => 2,                     // le texte dans l'input doit etre compris entre 2
+                    'max' => 30                     // et 30 caractères
                 ]),
-                'attr' => [
+                'attr' => [                         // attr: correspond a l'ajout d'attribue comme une class, un id, ou comme ici un placeholder
                     'placeholder'  => 'Merci de saisir votre prénom'
                 ]
             ])
@@ -48,18 +50,18 @@ class RegisterType extends AbstractType
                     'placeholder'  => 'Merci de saisir votre email'
                 ]
             ]) 
-            ->add('password', RepeatedType::class, [
+            ->add('password', RepeatedType::class, [   // Ce RepeatedType consiste a répéter l'input autant de fois que l'on veux
                 'type' => PasswordType::class,
                 'invalid_message' => 'Le mot de passe et la confirmation doivent être identique.',
                 'label' => 'Votre mot de passe',
-                'required' => true,
-                'first_options' => [
+                'required' => true,                    // Required signifie que ce champ est obligatoire ou non
+                'first_options' => [                   // Première répétition
                     'label' => 'Votre mot de passe',
                     'attr' => [
                         'placeholder'  => 'Merci de saisir votre mot de passe'
                     ]
                 ],
-                'second_options' => [
+                'second_options' => [                   // Seconde répétition
                     'label' => 'Confirmez votre mot de passe',
                     'attr' => [
                         'placeholder'  => 'Merci de confirmez votre mot de passe'

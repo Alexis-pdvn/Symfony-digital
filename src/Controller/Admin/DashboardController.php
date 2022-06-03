@@ -29,7 +29,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('French Box');
+            ->setTitle('Avamae');
     }
 
     public function configureMenuItems(): iterable
@@ -42,10 +42,12 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Nos Produits', 'fas fa-eye', Product::class),
             MenuItem::linkToCrud('Ajouter un Produit', 'fas fa-plus', Product::class)->setAction(Crud::PAGE_NEW),
         ]);
+
         yield MenuItem::subMenu('Categories', 'fas fa-list')->setSubItems([
             MenuItem::linkToCrud('Nos Categories', 'fas fa-eye', Category::class),
             MenuItem::linkToCrud('Ajouter une Categories', 'fas fa-plus', Category::class)->setAction(Crud::PAGE_NEW),
         ]);
+        
         yield MenuItem::linkToCrud('Tailles', 'fas fa-ruler', Variant::class);
         yield MenuItem::linkToCrud('Transporteur', 'fas fa-truck', Carrier::class);
         yield MenuItem::linkToCrud('Nos Commandes', 'fas fa-shopping-cart', Order::class);

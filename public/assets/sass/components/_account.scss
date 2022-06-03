@@ -1,0 +1,62 @@
+.account {
+
+    &_h1 {
+        font: normal normal bold 45px/30px Poppins;
+        color: #54595F;
+        margin: 80px 0px 29px 0px;
+    }
+
+    &_admin {
+
+        background-color: #e54e4e;
+        padding: 0.5rem 1rem;
+        font-size: 15px;
+        border-radius: 5px;
+        text-decoration: unset;
+        color: white;
+        transition: linear .2s;
+
+        &:hover{
+            background-color: #ff5757;
+            transition: linear .2s;
+        }
+    }
+
+    &_link {
+        
+    line-height: 30px;
+    margin: 40px 0;
+        a {
+            font: normal normal 400 17px Poppins;
+            color: #737373;
+            text-decoration: unset;
+
+            &:hover{
+                color: #484646;
+            }
+        }
+    }
+
+    &_logout{
+        background: #F9CDCB 0% 0% no-repeat padding-box;
+        padding: 10px 50px;
+        color: white;
+        border-radius: 4px;
+        font-size: 15px;
+        text-decoration: unset;
+            transition: .2s linear;
+
+
+            &:hover {
+                box-shadow: 0px 3px 6px #00000029;
+                transition: .2s linear;
+            }
+    }
+    
+    padding-bottom: 100px;
+
+    hr{
+        margin: 1rem 0;
+    }
+
+}

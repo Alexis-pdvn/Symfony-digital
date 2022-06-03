@@ -16,11 +16,11 @@
 			<span class="product-page-price">A partir de
 				<b>{{ (product.price / 100)|number_format(2, ',', '.') }}€</b>
 			</span>
-			<p class="product-page-subtitle">{{ product.subtitle }}</p>
+			<p class="product-page-subtitle">Poster vendu sans cadre.</p>
 			<p class="product-page-description">{{ product.description }}</p>
 
 			<div class="product-page-select">
-                <p>Dimensions :</p>
+				<p>Dimensions :</p>
 				<select class="form-select" aria-label="Default select example" onchange="affectSizeHidden(this.value)">
 					{% for size in size %}
 						<div>
@@ -46,4 +46,14 @@
 			{% include 'product/single.html.twig' %}
 		{% endfor %}
 	</div>
+
+
+{% endblock %}
+
+{% block script %}
+	<script>
+		function affectSizeHidden(id) {
+document.getElementById('id_size').value = id;
+}
+	</script>
 {% endblock %}

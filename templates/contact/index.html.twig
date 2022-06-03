@@ -1,14 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nous contacter !{% endblock %}
+{% block title %}Nous contacter !
+{% endblock %}
 
 {% block content %}
-<h2>Nous contacter</h2>
+	<h1>Nous contacter</h1>
 
-    {% for message in app.flashes('notice') %}
-        <div class="alert alert-info">{{ message }}</div>
-    {% endfor %}
+<div class="contact_page">
+	{% for message in app.flashes('notice') %}
+		<div class="alert alert-info">{{ message }}</div>
+	{% endfor %}
+    <hr>
+    {{ form_start(form) }}
 
-{{ form(form) }}
-
-{% endblock %}
+		<div class="form">
+			<div class="form_grid">
+				<div class="form_grid_content">{{ form_row(form.prenom) }}</div>
+				<div class="form_grid_content">{{ form_row(form.nom) }}</div>
+			</div>
+			<div class="form_grid">
+				<div class="form_grid_content">{{ form_row(form.email) }}</div>
+				<div class="form_grid_content">{{ form_row(form.number) }}</div>
+			</div>
+			<div class="form_grid_content">{{ form_row(form.objet) }}</div>
+			<div class="form_grid_content">{{ form_row(form.content) }}</div>
+		</div>
+        
+    {{ form_end(form) }}
+</div>
+	{% endblock %}

@@ -1,0 +1,131 @@
+.adresse_linkadd {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
+
+    &_back {
+
+        color: #F9CDCB;
+        text-decoration: unset;
+        font-size: 17px;
+
+        i {
+
+            transform: translate(0px);
+            transition: .2s linear;
+        }
+
+
+        &:hover i {
+
+            transform: translate(-4px);
+            transition: .2s linear;
+        }
+
+    }
+
+    &_add {
+
+        background-color: #F9CDCB;
+        padding: 0.5rem;
+        border-radius: 4px;
+        color: #ffffff;
+        text-decoration: unset;
+        font-size: 17px;
+        transition: .2s linear;
+
+        i {
+
+            margin-left: 0.5rem;
+        }
+
+        &:hover {
+            background-color: #fda6a3;
+            transition: .2s linear;
+        }
+
+    }
+
+}
+
+.grid_adresse {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    margin-top: 40px;
+    grid-auto-rows: minmax(200px, auto);
+
+    &_card {
+        background: rgba(249, 205, 203, 0.7);
+        border-radius: 18px;
+        position: relative;
+        transition: .2s linear;
+        overflow: hidden;
+
+        &:hover {
+
+            transition: .2s linear;
+            background: rgba(249, 205, 203, 1);
+        }
+
+        img {
+            position: absolute;
+            left: 50%;
+            opacity: 0.7;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(15deg);
+            transition: .2s linear;
+        }
+
+        &:hover img {
+            opacity: 1;
+            transform: translate(-50%, -50%) rotate(0deg);
+            transition: .2s linear;
+        }
+
+        &_content {
+            width: auto;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            text-align: center;
+            left: 50%;
+        }
+
+        .btn_action {
+            top: 0px;
+            border-bottom-left-radius: 4px;
+            width: 30%;
+            position: absolute;
+            display: flex;
+            right: 0%;
+            background: #ffffff94;
+            padding: 0.6rem 2rem;
+            justify-content: space-between;
+            transform: translate(0px, -50px);
+            transition: .2s linear;
+
+            i {
+
+                color: #E8D6D6;
+                font-size: 25px;
+
+                &:hover {
+                    color: #d1caca;
+                }
+
+            }
+
+        }
+
+        &:hover {
+            .btn_action {
+
+                transform: translate(0px, -0px);
+                transition: .2s linear;
+            }
+        }
+    }
+
+}

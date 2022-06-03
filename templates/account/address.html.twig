@@ -1,37 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mes adresses{% endblock %}
+{% block title %}Mes adresses
+{% endblock %}
 
 {% block content %}
 
-    <a href="{{ path('account_add_address') }}" class="btn btn-info btn-sm float-right">Ajouter une adresse</a>
-    <h1>Mes adresses</h1>
-    <a href="{{ path('account') }}">Retour</a>
-    <hr>
-{% if app.user.addresses|length == 0 %}
 
-    <p>
-    Vous n'avez pas encore ajouté d'adresse dans votre compte client. Pour en ajouter une, veuillez <a href="{{ path('account_add_address') }}">cliquer ici</a>
-    </p>
+	<h1>Mes adresses</h1>
+	<div class="adresse_linkadd">
+		<a class="adresse_linkadd_back" href="{{ path('account') }}">
+			<i class="fa-solid fa-angle-left"></i>
+			Retour</a>
+		<a href="{{ path('account_add_address') }}" class="adresse_linkadd_add">Ajouter une adresse
+			<i class="fa-solid fa-plus"></i>
+		</a>
+	</div>
 
-{% else %}
+	<hr>
+	{% if app.user.addresses|length == 0 %}
 
-    <div class="row">
-        {% for address in app.user.addresses %}
-            <div class="col-md-4 mb-5">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ address.name }}</h5>
-                        <p class="card-text">
-                            {{ address.address }},<br>
-                            {{ address.postal }} - {{ address.city }} - {{ address.country }}
-                        </p>
-                        <a href="{{ path('account_edit_address' , { 'id' : address.id }) }}" >Modifier</a> | <a href="{{ path('account_delete_address' , { 'id' : address.id }) }}" >Supprimer</a>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-{% endif %}
+		<p>
+			Vous n'avez pas encore ajouté d'adresse dans votre compte client. Pour en ajouter une, veuillez
+			<a href="{{ path('account_add_address') }}">cliquer ici</a>
+		</p>
+
+	{% else %}
+
+		<div class="grid_adresse">
+			{% for address in app.user.addresses %}
+				<div class="grid_adresse_card">
+					<img src="{{ asset('assets/img/map-marker-alt.png') }}">
+					<div class="grid_adresse_card_content" style="width: 18rem;">
+						<div class="grid_adresse_card_content_body">
+							<h5 class="card-title">{{ address.name }}</h5>
+							<p class="card-text"> {{ address.address }},<br> {{ address.postal }}
+								- {{ address.city }}
+								- {{ address.country }}
+							</p>
+						</div>
+					</div>
+					<div class="btn_action">
+						<a href="{{ path('account_edit_address' , { 'id' : address.id }) }}">
+							<i class="fa-solid fa-pen-to-square"></i>
+						</a>
+						<a href="{{ path('account_delete_address' , { 'id' : address.id }) }}">
+							<i class="fa-solid fa-trash-can"></i>
+						</a>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	{% endif %}
 
 {% endblock %}

@@ -1,40 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Validation de commande !{% endblock %}
+{% block title %}Détails de facturation !
+{% endblock %}
 
 {% block content %}
-    <h2>Validation de commande</h2>
-    <p>Choisissez vos préférences avant de passer votre commande.</p>
+	<h1>Détails de facturation</h1>
 
-    <div class="row">
-        <div class="col-md-6">
-            {% set formHtml %}
-                {{ form_start(form, {action:path('order_recap')}) }}
-                    {{ form_label(form.addresses, 'Choisissez votre adresse de livraison') }}
-                    <a href="{{ path('account_add_address') }}">Ajouter une nouvelle adresse</a>
-                {{ form_end(form) }}
-            {% endset %}
-            {{ formHtml|replace({'[br]' : '<br/>'})|raw }}
-        </div>
-        <div class="col-md-6">
-            <div class="text-center">
-                <b>Récap commande</b><br>
-                <p>Retrouvez le récapitulatif de votre panier.</p>
-            </div>
-            <div class="order-summary">
-                {% for key,product in cart %}
-                    <div class="row {% if key > 0 %}mt-2{% endif %}">
-                        <div class="col-2">
-                            <img src="/uploads/{{ product.product.image }}" alt="{{ product.product.name }}" height="80px">
-                        </div>
-                        <div class="col-8 my-auto">
-                            {{ product.product.name }}<br>
-                            <small>{{ product.size.size }}</small>
-                        </div>
-                        <div class="col-2 my-auto">x {{ product.quantity }}</div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
+	<div class="detail">
+		<div class="detail_delivery">
+			{% set formHtml %} {{ form_start(form, {action:path('order_recap')}) }}
+			<h2 class="detail_title title_addresse">{{ form_label(form.addresses) }}
+				<a class="link_add_addresse" href="{{ path('account_add_address') }}">Gérer mes adresses <i class="fa-solid fa-location-dot"></i></a>
+			</h2> {{ form_widget(form.addresses, {'attr': {'class': 'detail_delivery_card'}}) }}
+
+			<h2 class="detail_title">{{ form_label(form.carriers) }}</h2> {{ form_widget(form.carriers, {'attr': {'class': 'detail_delivery_card'}}) }}
+
+		</div>
+		<div class="detail_order">
+			<div>
+				<h2 class="detail_title">Récapitulatif de la commande</h2>
+			</div>
+			<div class="detail_order_bg">
+				<img class="detail_order_bg_bubble" src="/assets/img/border_img.png">
+				{% for key,product in cart %}
+					<div class="one_item_recap {% if key > 0 %}multiple_item_recap{% endif %}">
+						<div class="img_txt">
+							<img src="/uploads/{{ product.product.image }}" alt="{{ product.product.name }}" height="110px">
+							<div class="content_order"> {{ product.product.name }}<br>
+								<small>{{ product.size.size }}</small>
+							</div>
+						</div>
+						<div class="content_order">x {{ product.quantity }}</div>
+						<div class="content_order">{{ ((product.size.price * product.quantity ) / 100)|number_format(2, ',', '.') }}€</div>
+					</div>
+				{% endfor %} {{ form_widget(form.submit) }} {{ form_end(form) }}
+				{% endset %} {{ formHtml|replace({'[br]' : '<br/>'})|raw }}
+			</div>
+		</div>
+	</div>
 {% endblock %}

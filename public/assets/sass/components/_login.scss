@@ -1,0 +1,119 @@
+h1{
+    font: normal normal bold 35px Poppins;
+color: #54595F;
+margin-top: 50px;
+}
+
+.error_message{    
+    color: #ff0000;
+    border: 1px solid #E93C3C;
+    padding: 1rem;
+    background: #e93c3c14;
+    border-radius: 4px;
+    font-size: 15px;
+    margin-bottom: 1rem;
+}
+
+.block_login {
+    padding: 1rem 2rem;
+    max-width: 700px;
+    padding: 30px 55px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 0px 10px #00000029;
+    border-radius: 14px;
+    margin: 0 auto;
+    margin-top: 40px;
+
+    &_input {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+        margin-top: 1rem;
+
+        label {
+            width: 35%;
+            font-size: 16px;
+            color: #54595F;
+            font-weight: 500;
+        }
+
+        input {
+            background: #FFFFFF 0% 0% no-repeat padding-box;
+            border: 1px solid #707070;
+            border-radius: 5px;
+            width: 70%;
+            padding: 7px 0 7px 5px;
+        }
+
+        &:nth-child(2){
+            
+        margin-bottom: 0.4rem!important;
+        }
+
+    }
+    
+
+    .link_password{
+        display: flex;
+
+        a{
+            margin: 0px 0px 0px 33.5%;
+            text-decoration: unset;
+            font-size: 15px;
+            color: #F9CDCB;
+
+            &:hover{
+                text-decoration: underline;
+            }
+
+        }
+
+    }
+
+    .link_register{
+            font-size: 15px;
+            color: #54595F;
+        a{
+            margin: 0 auto;
+            text-decoration: unset;
+            color: #F9CDCB;
+            &:hover{
+                text-decoration: underline;
+            }
+
+        }
+
+    }
+
+    p {
+        margin: 1rem;
+        text-align: center;
+
+        a {
+            color: #23B9D7;
+        }
+    }
+
+    button {
+        margin: 0 auto;
+        background: #F9CDCB 0% 0% no-repeat padding-box;
+        border-radius: 4px;
+        display: -webkit-box;
+        font-size: 15px;
+        display: -ms-flexbox;
+        display: flex;
+        color: #ffffff;
+        border: 0px;
+        margin-top: 40px;
+        padding: 10px 80px;
+        margin-bottom: 20px;
+
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0px 3px 6px #00000029;
+            transition: .2s linear;
+        }
+    }
+
+
+}

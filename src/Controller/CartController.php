@@ -26,7 +26,6 @@ class CartController extends AbstractController
     public function index(Cart $cart): Response
     {
         $carrier = $this->entityManager->getRepository(Carrier::class)->findAll();
-
         return $this->render('cart/index.html.twig', [
             'carrier' => $carrier,
             'cart' => $cart->getFull()

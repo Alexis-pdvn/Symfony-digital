@@ -15,16 +15,19 @@
 		<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
 		<!--<link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">-->
+
 		<!-- sass files -->
 		<link href="{{ asset('assets/sass/style.css') }}" rel="stylesheet">
 		<link href="{{ asset('assets/sass/style.css.map') }}" rel="stylesheet">
+
+		
 		<link
 		rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 		<!-- Bootstrap core CSS
-				    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
-				    <link href="{{ asset('assets/css/frenchbox.css') }}" rel="stylesheet">
-				    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-				    -->
+														    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+														    <link href="{{ asset('assets/css/frenchbox.css') }}" rel="stylesheet">
+														    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+														    -->
 
 		{% block javascript %}{% endblock %}
 
@@ -53,8 +56,8 @@
 		<header class="fixed-top">
 			<nav class="top-header">
 				<div class="container top-header_content">
-				<a href="{{ path('home') }}">
-					<img class="top-header_img" alt="Logo AVAMAE" src="{{ asset('assets/img/logo.svg') }}">
+					<a href="{{ path('home') }}">
+						<img class="top-header_img" alt="Logo AVAMAE" src="{{ asset('assets/img/logo.svg') }}">
 					</a>
 					<div class="top-header_content_search-bar"> {{ render(controller(
                 'App\\Controller\\SearchController::searchBar'
@@ -64,12 +67,12 @@
 						<span>
 							{% if app.user %}
 								<span class="nav_cart">
-									<a href="{{ path('cart') }}">
+									<a class="icon_nav_top" href="{{ path('cart') }}">
 										<i class="fa-solid fa-cart-shopping"></i>
 									</a>
 								</span>
 								<div class="account_menu_hover">
-									<a href="{{ path('account') }}">
+									<a class="icon_nav_top" href="{{ path('account') }}">
 										<i class="fa-solid fa-circle-user"></i>
 										<small>({{ app.user.firstname }})</small>
 									</a>
@@ -81,9 +84,8 @@
 									</div>
 								</div>
 							{% else %}
-								<a class="nav_a" href="{{ path('app_login') }}">Connexion</a>
-								|
-								<a class="nav_a" href="{{ path('register') }}">Inscription</a>
+								<a class="nav_connexion" href="{{ path('app_login') }}">Connexion</a>
+								<a class="nav_inscription" href="{{ path('register') }}">Inscription</a>
 							{% endif %}
 						</span>
 					</div>
@@ -113,41 +115,74 @@
 
 		<main role="main">
 
+{% if block('carousel') is defined %}
+<!-- Slideshow container -->.
+<div class="slideshow">
+<div class="slideshow-container">
+
+{% for key,carrousel in carrousel %}
+	<div class="mySlides fade {% if key == 0 %}active{% endif %}" style="background: url('/slider/{{ carrousel.Image }}'); background-size: cover; background-position: center;
+    height: inherit;">
+		<div class="mySlides_content">
+			<div class="carousel-caption">
+				<h1 class="carousel-caption_title">{{ carrousel.title }}</h1>
+				<p class="carousel-caption_content">{{ carrousel.content }}</p>
+				<p class="carousel-caption_link"><a href="{{ carrousel.btnUrl }}" role="button">{{ carrousel.btnTitle }}</a></p>
+			</div>
+		</div>
+	</div>
+{% endfor %}
+
+  <!-- Next and previous buttons -->
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+<br>
+
+<!-- The dots/circles -->
+<div class="btn_nav_slide" style="text-align:center">
+	{% for key,carrousel in carrousel %}
+  <span class="dot" onclick="currentSlide({{ key }})"></span>
+	{% endfor %}
+</div>
+</div>
+
+{% endif %}
 
 			<!-- 
-						{% if block('carousel') is defined %}
-						    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-						        <ol class="carousel-indicators">
-						            {% for key,carrousel in carrousel %}
-						            <li data-target="#myCarousel" data-slide-to="{{ key }}"  {% if key == 0 %}class="active"{% endif %}></li>
-						            {% endfor %}
-						        </ol>
-						        <div class="carousel-inner">
-						            {% for key,carrousel in carrousel %}
-						            <div class="carousel-item {% if key == 0 %}active{% endif %}" style="background: url('/slider/{{ carrousel.Image }}'); background-size: cover; background-position: center;">
-						                <div class="container">
-						                    <div class="carousel-caption">
-						                        <h1>{{ carrousel.title }}</h1>
-						                        <p>{{ carrousel.content }}</p>
-						                        <p><a class="btn btn-lg btn-primary" href="{{ carrousel.btnUrl }}" role="button">{{ carrousel.btnTitle }}</a></p>
-						                    </div>
-						                </div>
-						            </div>
-						            {% endfor %}
-						        </div>
-						        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-						            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						            <span class="sr-only">Previous</span>
-						        </a>
-						        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-						            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-						            <span class="sr-only">Next</span>
-						        </a>
-						    </div>
-						{% endif %}
-						
-						    <!-- Marketing messaging and featurettes
-						    ================================================== -->
+																					{% if block('carousel') is defined %}
+																					    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+																					        <ol class="carousel-indicators">
+																					            {% for key,carrousel in carrousel %}
+																					            <li data-target="#myCarousel" data-slide-to="{{ key }}"  {% if key == 0 %}class="active"{% endif %}></li>
+																					            {% endfor %}
+																					        </ol>
+																					        <div class="carousel-inner">
+																					            {% for key,carrousel in carrousel %}
+																					            <div class="carousel-item {% if key == 0 %}active{% endif %}" style="background: url('/slider/{{ carrousel.Image }}'); background-size: cover; background-position: center;">
+																					                <div class="container">
+																					                    <div class="carousel-caption">
+																					                        <h1>{{ carrousel.title }}</h1>
+																					                        <p>{{ carrousel.content }}</p>
+																					                        <p><a class="btn btn-lg btn-primary" href="{{ carrousel.btnUrl }}" role="button">{{ carrousel.btnTitle }}</a></p>
+																					                    </div>
+																					                </div>
+																					            </div>
+																					            {% endfor %}
+																					        </div>
+																					        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+																					            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+																					            <span class="sr-only">Previous</span>
+																					        </a>
+																					        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+																					            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+																					            <span class="sr-only">Next</span>
+																					        </a>
+																					    </div>
+																					{% endif %}
+																					
+																					    <!-- Marketing messaging and featurettes
+																					    ================================================== -->
 			<!-- Wrap the rest of the page in another container to center all the content. -->
 
 				<div class="container marketing {% if block('carousel') is not defined %}mt-5{% endif %}">{% block content %}{% endblock %} </div>
@@ -187,37 +222,14 @@
 					</ul>
 				</footer>
 			</main>
+			<script src="{{ asset('assets/js/slider.js') }}"></script>
 			<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-			<!--<script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
-					</body>
-					{% block script %}
-					    <script>
-					/*
-					        const selectElement = document.querySelector('.form-select');
-					        const Alloption = document.querySelectorAll('.form-select option');
-					        const Allbtn = document.querySelectorAll('.btn-choice-display');
-					
-					        Allbtn[0].classList.remove('btn-choice-display');
-					
-					        selectElement.addEventListener('change', (event) => {
-					            for ( let numb=0; numb<Alloption.length; numb++){
-					                Allbtn[numb].classList.add('btn-choice-display');
-					                if (Alloption[numb].value == selectElement.value){
-					                    console.log(Allbtn[numb])
-					                    Allbtn[numb].classList.remove('btn-choice-display');
-					                }
-					            }
-					        });*/
-					
-					    function affectSizeHidden(id){
-					        document.getElementById('id_size').value = id;
-					    }
-					
-					    </script>
-					{% endblock %}
-					</html> 
-				</body>
-			</html>
-			 
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+			<script src="{{ asset('assets/js/test.js') }}"></script>
+			<!--<script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>-->
 		</body>
+		{% block script %}
+			{% endblock %}
+
+		</html>
 	</html>

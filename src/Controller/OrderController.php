@@ -71,9 +71,7 @@ class OrderController extends AbstractController
                 $delivery_content .= "<br/>".$delivery->getCompany();
             }
 
-            $delivery_content .= "<br/>".$delivery->getAddress();
-            $delivery_content .= "<br/>".$delivery->getPostal().' '.$delivery->getCity();
-            $delivery_content .= "<br/>".$delivery->getCountry();
+            $delivery_content .= "<br/>".$delivery->getAddress()." ".$delivery->getPostal().','.$delivery->getCity()." - ".$delivery->getCountry();
 
             // Enregistrer ma commandes Order()
             $order = new Order();

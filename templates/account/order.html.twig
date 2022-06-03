@@ -4,8 +4,8 @@
 
 {% block content %}
 
-    <h1>Mes commandes</h1>
-    <a href="{{ path('account') }}">Retour</a>
+    <h1>Mes commandes <a class="return_account" href="{{ path('account') }}">Retour vers mon compte</a></h1>
+
     {% if orders|length == 0 %}
 
         <hr>
@@ -14,24 +14,24 @@
         </p>
 
     {% else %}
-        <table class="table mt-4">
+        <table class="table_order">
             <thead>
             <tr>
-                <th scope="col">Passée le</th>
-                <th scope="col">Référence</th>
-                <th scope="col">Statut</th>
-                <th scope="col">Produit(s)</th>
-                <th scope="col">Total</th>
-                <th scope="col"></th>
+                <th class="creat_at">Passée le</th>
+                <th class="reference">Référence</th>
+                <th class="state">Statut</th>
+                <th class="product">Produit(s)</th>
+                <th class="total">Total</th>
+                <th class=""></th>
             </tr>
             </thead>
             <tbody>
 
             {% for order in orders %}
-                <tr>
-                    <td><span class="badge badge-secondary">{{ order.reference }}</span></td>
-                    <td>{{ order.createdAt|date('d/m/Y') }}</td>
-                    <td>
+                <tr class="table_order_item">
+                    <td class="table_order_item_date">{{ order.createdAt|date('d/m/Y') }}</td>
+                    <td><span class="table_order_item_reference">{{ order.reference }}</span></td>
+                    <td class="table_order_item_state">
                         {% if order.state == 1 %}
                             <span style="color: green">Paiement accepté</span>
                         {% elseif order.state == 2 %}
@@ -40,9 +40,9 @@
                             <span style="color: blue">Livraison en cours</span>
                         {% endif %}
                     </td>
-                    <td>{{ order.orderDetails|length }}</td>
-                    <td>{{ ((order.carrierPrice + order.getTotal) / 100)|number_format(2,',','.')}} €</td>
-                    <td class="text-right"><a href="{{ path('account_order_show', { 'reference' : order.reference }) }}">Voir ma commande</a></td>
+                    <td class="table_order_item_detail">{{ order.orderDetails|length }}</td>
+                    <td class="table_order_item_price">{{ ((order.carrierPrice + order.getTotal) / 100)|number_format(2,',','.')}} €</td>
+                    <td class="table_order_item_btn_show"><a href="{{ path('account_order_show', { 'reference' : order.reference }) }}"><i class="fa-solid fa-eye"></i></a></td>
                 </tr>
             {% endfor %}
 

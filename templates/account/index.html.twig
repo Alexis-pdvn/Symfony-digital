@@ -4,16 +4,22 @@
 
 {% block content %}
 
-    <h1>Mon compte</h1>
-    Bienvenue {{ app.user.firstname }} dans votre compte.<br>
+<div class="account">
+    <h1 class="account_h1">Bienvenue {{ app.user.firstname }} dans votre compte.</h1>
 
 {% if is_granted('ROLE_ADMIN') %}
 
-<a href="/admin">Accéder au backoffice<a/><br>
+<a class="account_admin" href="/admin">Espace administrateur<a/>
 {% endif %}
     <hr>
-    - <a href="{{ path('account_password') }}">Modifier le mot de passe<a/><br>
-    - <a href="{{ path('account_address') }}">Gérer mes adresses</a><br>
-    - <a href="{{ path('account_order') }}">Mes commandes</a><br>
-    <hr>
+<div class="account_link">
+    <a href="{{ path('account_password') }}">- Modifier le mot de passe<a/><br>
+    <a href="{{ path('account_address') }}">- Gérer mes adresses</a><br>
+    <a href="{{ path('account_order') }}">- Mes commandes</a><br>
+</div>
+
+<a class="account_logout" href="{{ path('app_logout') }}">Se déconnecter</a>
+
+</div>
+
 {% endblock %}

@@ -26,6 +26,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 100px;
 
     &_card {
 
@@ -77,7 +78,9 @@
     
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center;    
+    margin-bottom: 100px;
+
     a{
         text-decoration: none;
     }

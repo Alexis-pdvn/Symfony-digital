@@ -1,0 +1,34 @@
+.contact_page{
+
+    .form_grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 25px;
+
+        &_content {
+
+            .form-group {
+                display: flex;
+                flex-direction: column;
+                
+                label {
+                    width: 35%;
+                    font-size: 16px;
+                    color: #54595F;
+                    font-weight: 500;
+                }
+
+                input {
+                    background: #FFFFFF 0% 0% no-repeat padding-box;
+                    border: 1px solid #707070;
+                    border-radius: 5px;
+                    padding: 7px 0 7px 10px;
+                }
+
+            }
+
+        }
+
+    }
+
+}
